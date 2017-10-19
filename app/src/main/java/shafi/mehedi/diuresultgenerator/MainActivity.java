@@ -4,43 +4,35 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+import java.util.Calendar;
 
-import Calculations.Store;
+import Models.SemesterPartedResult;
+import Models.Store;
 import Calculations.Utilities;
-import Code.OlineHandler;
-import Code.Scrapper;
+import Code.OnlineHandler;
 import Models.Student;
-import Models.Subject;
 
 public class MainActivity extends AppCompatActivity {
 
     public String htmlData;
     private EditText id;
-    private Spinner fromYear, fromSemester, toYear, toSemester;
-    private TextView currentProcess;
+    private Button generate, show;
     private ProgressBar progressBar;
-    private Button submit, show;
+    private TextView progressText;
     private String student_id;
-    private String semester_from, semester_to;
-    private ArrayList<Subject> results;
     private Student student = new Student();
     private Store mainStorage = new Store();
+    private SemesterPartedResult semesterPartedResult = new SemesterPartedResult();
 
-    private final int WAIT_TIME = 20000000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
         initalize();
 
-        submit.setOnClickListener(new View.OnClickListener(){
+        generate.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 generateResult();
-                progressBar.setEnabled(true);
-                submit.setVisibility(View.INVISIBLE);
+                generate.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -67,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("dataList", mainStorage.getData());
                 mBundle.putSerializable("studentData", student);
+                mBundle.putSerializable("semesterPartedData", semesterPartedResult);
 
                 i.putExtras(mBundle);
 
@@ -80,72 +72,35 @@ public class MainActivity extends AppCompatActivity {
     public void initalize(){
 
         id = (EditText) findViewById(R.id.idInput);
-        fromYear = (Spinner) findViewById(R.id.spinnerFromYear);
-        fromSemester = (Spinner) findViewById(R.id.spinnerFromSemester);
-        toYear = (Spinner) findViewById(R.id.spinnerToYear);
-        toSemester = (Spinner) findViewById(R.id.spinnerToSemester);
-        currentProcess = (TextView) findViewById(R.id.currentProcess);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        submit = (Button) findViewById(R.id.generateResultButton);
-        show = (Button) findViewById(R.id.viewResult);
 
-        progressBar.setVisibility(View.INVISIBLE);
-        currentProcess.setVisibility(View.INVISIBLE);
+        generate = (Button) findViewById(R.id.go_button);
+        show = (Button) findViewById(R.id.show_result);
         show.setVisibility(View.INVISIBLE);
 
-
-        ArrayList<String> yearsFrom = new ArrayList<>();
-        ArrayList<String> yearsTo = new ArrayList<>();
-        for (int i = 2000; i < 2050; i++){
-            yearsFrom.add(String.valueOf(i));
-            yearsTo.add(String.valueOf(i));
-        }
-        ArrayList<String> semestersFrom = new ArrayList<>();
-        ArrayList<String> semestersTo = new ArrayList<>();
-        semestersFrom.add("Spring");
-        semestersFrom.add("Summer");
-        semestersFrom.add("Fall");
-        semestersTo.add("Spring");
-        semestersTo.add("Summer");
-        semestersTo.add("Fall");
-
-        ArrayAdapter<String> yearAdapterFrom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yearsFrom);
-        ArrayAdapter<String> yearAdapterTo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yearsTo);
-        ArrayAdapter<String> semesterAdapterFrom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, semestersFrom);
-        ArrayAdapter<String> semesterAdapterTo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, semestersTo);
-
-        yearAdapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        yearAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        semesterAdapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        semesterAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        fromYear.setAdapter(yearAdapterFrom);
-        toYear.setAdapter(yearAdapterTo);
-        fromSemester.setAdapter(semesterAdapterFrom);
-        toSemester.setAdapter(semesterAdapterTo);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressText = (TextView) findViewById(R.id.progress_text);
+        progressBar.setVisibility(View.INVISIBLE);
+        progressText.setVisibility(View.INVISIBLE);
 
     }
 
     public void generateResult() {
         student_id = id.getText().toString();
-        semester_from = Utilities.semester_id_generation(fromYear.getSelectedItemPosition() + 2000, fromSemester.getSelectedItemPosition() + 1);
-        semester_to = Utilities.semester_id_generation(toYear.getSelectedItemPosition() + 2000, toSemester.getSelectedItemPosition() + 1);
-        Log.v("Semester from ", semester_from);
-        Log.v("Semester to ", semester_to);
-        progressBar.setVisibility(View.VISIBLE);
-
-        int currentsem;
-
-
-        for (int i = Integer.parseInt(semester_from); i <= Integer.parseInt(semester_to); i++) {
-
-            OlineHandler handler = new OlineHandler(student_id, String.valueOf(i), student, mainStorage, i, Integer.parseInt(semester_to), show, progressBar, currentProcess);
-            handler.execute();
-
-            if (i % 10 == 3){
-                i += 7;
+        int semester_from = Utilities.admissionSemester(student_id);
+        if (semester_from == -1){
+            Toast.makeText(getApplicationContext(), "Invalid ID", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            int last_t_digits = year % 100;
+           String year_t = String.valueOf(last_t_digits) + "3";
+            int semester_to = Integer.parseInt(year_t);
+            System.out.println("year " + year + " semester to: " + semester_to);
+            for (int i = semester_from; i <= semester_to; i++){
+                OnlineHandler handler = new OnlineHandler(student_id, String.valueOf(i), student, mainStorage, i, semester_to, show, progressBar, progressText, semesterPartedResult);
+                handler.execute();
+                if (i % 10 == 3) i += 7;
             }
-
         }
     }
 

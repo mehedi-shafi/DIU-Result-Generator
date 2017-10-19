@@ -24,6 +24,15 @@ public class Utilities {
         return semester_id;
     }
 
+    public static String semesterTitle (int semesterId){
+        String[] semesters = new String[] {"nada", "Spring", "Summer", "Fall"};
+        int yearId = semesterId/10;
+        String title = semesters[semesterId%10] + ", 20" + String.valueOf(yearId);
+        if (title == null)
+            return "Semester";
+        return title;
+    }
+
     public static int numberSemester (String from, String to){
         int frm = Integer.parseInt(from);
         int t = Integer.parseInt(to);
@@ -54,6 +63,15 @@ public class Utilities {
             }
         }
         return dump;
+    }
+
+    public static int admissionSemester(String id){
+        id = id.trim();
+        String[] parts = id.split("-");
+        if (parts.length < 3){
+            return -1;
+        }
+        return Integer.parseInt(parts[0]);
     }
 
 }

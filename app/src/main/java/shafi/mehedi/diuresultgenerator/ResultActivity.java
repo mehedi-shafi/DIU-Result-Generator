@@ -12,8 +12,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import Adapters.ResultListAdapter;
+import Adapters.SemesterListAdapter;
 import Calculations.CGPA_calc;
 import Calculations.Utilities;
+import Models.SemesterPartedResult;
 import Models.Student;
 import Models.Subject;
 
@@ -24,6 +26,8 @@ public class ResultActivity extends AppCompatActivity {
 
     ResultListAdapter listAdapter;
 
+    SemesterListAdapter semesterListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,7 @@ public class ResultActivity extends AppCompatActivity {
 
         ArrayList<Subject> resultData = (ArrayList<Subject>) mBundle.getSerializable("dataList");
         Student student = (Student) mBundle.getSerializable("studentData");
+        SemesterPartedResult semesterPartedData = (SemesterPartedResult) mBundle.getSerializable("semesterPartedData");
 
         name = (TextView) findViewById(R.id.resultStudentName);
         id = (TextView) findViewById(R.id.resultStudentId);
@@ -40,10 +45,8 @@ public class ResultActivity extends AppCompatActivity {
         batch = (TextView) findViewById(R.id.resultStudentBatch);
 
         resultList = (ListView) findViewById(R.id.ResultList);
-        listAdapter = new ResultListAdapter(this, R.layout.result_row, resultData);
-        resultList.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
-
+        semesterListAdapter = new SemesterListAdapter(this, R.layout.semester_row, semesterPartedData.getSemesters());
+        resultList.setAdapter(semesterListAdapter);
 
         credit = (TextView) findViewById(R.id.creditDone);
         courses = (TextView) findViewById(R.id.courseTaken);

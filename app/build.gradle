@@ -39,14 +39,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
 
     })
-
     compile files('libs/jsoup-1.10.3.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     testCompile 'junit:junit:4.12'
 }
+
 
 
 

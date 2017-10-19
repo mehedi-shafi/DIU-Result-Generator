@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/studentData"
             android:layout_marginTop="10dp"
-
             android:orientation="vertical"
             android:background="#E6EE9C">
 
@@ -24,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp">
 
                 <TextView
@@ -63,7 +63,7 @@
                     android:textSize="18sp"
                     android:text="@string/my_id"
                     android:id="@+id/resultStudentId"
-                    android:layout_marginLeft="80dp"/>
+                    android:layout_marginLeft="42dp"/>
 
 
             </LinearLayout>
@@ -99,7 +99,8 @@
                 android:orientation="horizontal"
                 android:paddingRight="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,9 +186,12 @@
                 android:id="@+id/ResultList"
                 tools:layout_editor_absoluteY="0dp"
                 tools:layout_editor_absoluteX="0dp"
+                android:dividerHeight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_above="@id/resultSummary"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:focusable="true"
+                android:nestedScrollingEnabled="true">
 
 
             </ListView>
