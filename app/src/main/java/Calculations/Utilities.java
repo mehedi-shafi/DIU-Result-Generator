@@ -10,7 +10,7 @@ import Models.Subject;
 
 public class Utilities {
 
-    public static final String RESULT_URL= "http://studentportal.diu.edu.bd/result";
+    public static final String RESULT_URL= "http://vus.daffodilvarsity.edu.bd/?app=result";
     public static String htmlData = "";
 
     public static String semester_id_generation (int year, int semester){

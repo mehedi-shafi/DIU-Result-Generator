@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -103,7 +104,29 @@ public class SemesterListAdapter extends ArrayAdapter {
         ResultListAdapter listAdapter = new ResultListAdapter(activity, R.layout.result_row, holder.semesterStorage.getData());
         holder.resultList.setAdapter(listAdapter);
 
+        setListViewHeight(holder.resultList);
+
         return row;
+    }
+
+    public static void setListViewHeight(ListView listView){
+        ListAdapter adapter = listView.getAdapter();
+        if (adapter == null){
+            return;
+        }
+
+        int totalHeight = 0;
+
+        View view = null;
+
+        for (int i = 0; i < adapter.getCount(); i++){
+            view = adapter.getView(i, view, listView);
+            totalHeight += 200;
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() -1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
     public class SemesterViewHolder{

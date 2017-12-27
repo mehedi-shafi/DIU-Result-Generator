@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import Code.Scrapper;
+import Code.SendGet;
 import Models.SemesterPartedResult;
 import Models.Store;
 import Calculations.Utilities;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("dataList", mainStorage.getData());
                 mBundle.putSerializable("studentData", student);
+                System.out.println(student.getName());
                 mBundle.putSerializable("semesterPartedData", semesterPartedResult);
 
                 i.putExtras(mBundle);
@@ -85,8 +88,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void generateResult() {
-        student_id = id.getText().toString();
+        student_id = id.getText().toString().trim();
         int semester_from = Utilities.admissionSemester(student_id);
+        if (!student.isStored()){
+            SendGet sendGet = new SendGet("http://software.diu.edu.bd/studentportalApi/result/studentInfo?studentId=" + student_id, student);
+            sendGet.execute();
+        }
         if (semester_from == -1){
             Toast.makeText(getApplicationContext(), "Invalid ID", Toast.LENGTH_SHORT).show();
         }

@@ -88,26 +88,8 @@ public class ResultListAdapter extends ArrayAdapter {
         holder.result.setText(holder.subject.getGradePoint());
 
 
-//        final ResultListViewHolder finalHolder = holder;
-//        row.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(activity, SubjectResult.class);
-//
-//                Bundle mBundle = new Bundle();
-//                mBundle.putSerializable("data", finalHolder.subject);
-//
-//                i.putExtras(mBundle);
-//
-//                activity.startActivity(i);
-//
-//            }
-//        });
 
         return row;
-
-
     }
 
     public class ResultListViewHolder{

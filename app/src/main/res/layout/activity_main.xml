@@ -25,6 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/go_text"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:background="@drawable/go_button_bg"
@@ -52,6 +54,15 @@
             android:background="@drawable/show_result_bg"
             android:text="@string/show_result"
             android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/dark_grey"
+            android:text="@string/advanced_options"
+            android:layout_marginTop="5dp"
+            android:id="@+id/advanceButton"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -67,8 +67,7 @@
          <ListView
             android:id="@+id/subjectListSemester"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -78,11 +77,11 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/ash">
 
@@ -90,14 +89,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/total_courses"
             android:layout_marginTop="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:id="@+id/total_courses_semester"
             android:text="@string/courses"
             android:layout_marginTop="5dp"/>
@@ -106,14 +105,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/total_credit_text"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/credit_done"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:id="@+id/credit_done_semester"
             android:layout_marginTop="5dp"/>
 
@@ -121,32 +120,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:text="SGPA"
-            android:layout_marginTop="5dp"            />
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sgpa_semester"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/cg"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginTop="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cg_text"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cg"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
-            android:id="@+id/cgpa_semester"/>
+            android:id="@+id/cgpa_semester"
+            android:textColor="@color/bright_indigo"
+            android:textStyle="bold"
+            android:layout_marginRight="2dp"/>
 
     </LinearLayout>
 

@@ -6,6 +6,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import Models.SemesterPartedResult;
 import Models.Store;
 import Calculations.Utilities;
@@ -59,10 +66,6 @@ public class OnlineHandler extends AsyncTask  {
         currentProcess.setText("Currently fetching data for semester: " + current);
         try {
             Scrapper scrapper = new Scrapper(htmlDATA, Integer.parseInt(semesterID));
-            if (!student.isStored()){
-                Student temp = scrapper.getStudentData();
-                student.setStudent(temp);
-            }
 
             this.storage.addData(scrapper.getResult());
             SemesterStorage temp = new SemesterStorage(Integer.parseInt(semesterID), scrapper.getResult());
@@ -86,7 +89,7 @@ public class OnlineHandler extends AsyncTask  {
     }
 
     private String post (String stud_id, String sem_id) throws  Exception{
-        RequestBody body = new FormBody.Builder().add("student_id", stud_id).add("semester_id", sem_id).build();
+        RequestBody body = new FormBody.Builder().add("STUDENT_ID", stud_id).add("SELESTER_ID", sem_id).build();
         Request request = new Request.Builder().url(Utilities.RESULT_URL).post(body).build();
         Response response = client.newCall(request).execute();
         this.htmlDATA = response.body().string();
@@ -94,6 +97,7 @@ public class OnlineHandler extends AsyncTask  {
         Utilities.htmlData = htmlDATA;
         return htmlDATA;
     }
+
 
     @Override
     protected Object doInBackground(Object[] params) {

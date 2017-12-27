@@ -1,6 +1,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by shafi on 7/21/2017.
@@ -14,6 +15,17 @@ public class Student implements Serializable {
     private String batch;
     private String enrollment;
     private boolean stored;
+
+    public Student(Map<String, String> data){
+        System.out.println("Got Student data.. yay");
+        System.out.println(data.toString());
+        this.name = data.get("studentName");
+        this.id = data.get("studentId");
+        this.program = data.get("programName");
+        this.batch = data.get("batchNo");
+        this.enrollment = data.get("semesterName");
+        this.stored = true;
+    }
 
     public Student(){
         stored = false;

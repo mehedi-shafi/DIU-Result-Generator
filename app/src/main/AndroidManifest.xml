@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".ResultActivity" />
         <activity android:name=".SubjectResult" />
+        <activity android:name=".AdvancedActivity" />
+        <activity android:name=".SpeicificSemester"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">DIU Result Generator</string>
     <string name="id_text">Your ID</string>
-    <string name="go_text">Go</string>
+    <string name="go_text">Complete Result</string>
     <string name="result_show_button">Generate Result</string>
     <string name="to_text">to</string>
+    <string name="advanced_options">Advance Options</string>
     <string name="id_hint">Your DIU ID</string>
     <string name="from_text">From</string>
     <string name="current_process">Fetching 151</string>
@@ -29,4 +30,8 @@
     <string name="show_result">Show Result</string>
     <string name="course_code_text">Code</string>
     <string name="course_name_text">Course Name</string>
+    <string name="specific_semester">Specific Semester Result</string>
+    <string name="result_analysis">Analyze Your Result</string>
+    <string name="suggestions">Get Suggestive Path</string>
+    <string name="sepecific_semester_des">See Result by Selecting Semester</string>
 </resources>

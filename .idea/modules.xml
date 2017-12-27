@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DIUResultGenerator.iml" filepath="$PROJECT_DIR$/DIUResultGenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/DIU-Result-Generator.iml" filepath="$PROJECT_DIR$/.idea/DIU-Result-Generator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
