@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import Code.Scrapper;
 import Code.SendGet;
@@ -46,8 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                generateResult();
-                generate.setVisibility(View.INVISIBLE);
+                Pattern pattern = Pattern.compile("\\d{3}-\\d{2}-\\d{2,10}");
+                if (pattern.matcher(id.getText().toString().trim()).matches()) {
+                    generateResult();
+                    generate.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Invalid Id", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

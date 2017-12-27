@@ -55,14 +55,14 @@
             android:text="@string/show_result"
             android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/dark_grey"
-            android:text="@string/advanced_options"
-            android:layout_marginTop="5dp"
-            android:id="@+id/advanceButton"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/dark_grey"-->
+            <!--android:text="@string/advanced_options"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:id="@+id/advanceButton"/>-->
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

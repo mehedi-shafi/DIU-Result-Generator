@@ -104,28 +104,30 @@ public class SemesterListAdapter extends ArrayAdapter {
         ResultListAdapter listAdapter = new ResultListAdapter(activity, R.layout.result_row, holder.semesterStorage.getData());
         holder.resultList.setAdapter(listAdapter);
 
-        setListViewHeight(holder.resultList);
+//        setListViewHeight(holder.resultList);
+        justifyListViewHeightBasedOnChildren(holder.resultList);
 
         return row;
     }
 
-    public static void setListViewHeight(ListView listView){
+    public static void justifyListViewHeightBasedOnChildren (ListView listView) {
+
         ListAdapter adapter = listView.getAdapter();
-        if (adapter == null){
+
+        if (adapter == null) {
             return;
         }
-
+        ViewGroup vg = listView;
         int totalHeight = 0;
-
-        View view = null;
-
-        for (int i = 0; i < adapter.getCount(); i++){
-            view = adapter.getView(i, view, listView);
-            totalHeight += 200;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, vg);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight()+20;
         }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() -1));
-        listView.setLayoutParams(params);
+
+        ViewGroup.LayoutParams par = listView.getLayoutParams();
+        par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount()));
+        listView.setLayoutParams(par);
         listView.requestLayout();
     }
 

@@ -22,7 +22,7 @@
     <string name="credit_done">89</string>
     <string name="courses">37</string>
     <string name="course_title">System Analysis and Organization</string>
-    <string name="credit_text">Credit</string>
+    <string name="credit_text">CR</string>
     <string name="credit">3.0</string>
     <string name="course_code">CSE112</string>
     <string name="about">About the Project</string>
